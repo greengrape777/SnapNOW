@@ -9,6 +9,14 @@ export default function App() {
     let backImg = 'https://content.imageresizer.com/images/memes/Pop-Cat-meme-5.jpg'
     let [img, setImg] = useState([frontImg, backImg]);
 
+    const changeImg = () => {
+        let copy = [...img];
+        let dum = copy[0];
+        copy[0] = copy[1];
+        copy[1] = dum;
+        setImg(copy);
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.user}>
@@ -23,13 +31,7 @@ export default function App() {
                 </View>
             </View>
             <View>
-                <Pressable onPress={() => {
-                    let copy = [...img];
-                    let dum = copy[0];
-                    copy[0] = copy[1];
-                    copy[1] = dum;
-                    setImg(copy);
-                }}>
+                <Pressable onPress={ changeImg }>
                     <ImageBackground source={{ uri: img[0] }} style={styles.articleLargeImage}>
                         <View>
                             <Image source={{ uri: img[1] }} style={styles.articleSmallImage} />
