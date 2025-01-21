@@ -1,21 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, Pressable } from 'react-native';
 import { Link } from 'expo-router';
+import { useState } from 'react';
 
 export default function App() {
+
+    let frontImg = 'https://popcat.click/twitter-card.jpg';
+    let backImg = 'https://content.imageresizer.com/images/memes/Pop-Cat-meme-5.jpg'
+    let [img, setImg] = useState([frontImg, backImg]);
+
     return (
         <View style={styles.container}>
             <View style={styles.user}>
-                <View style={styles.profile}></View>
-                <View><Text style={styles.userName}>imthebest</Text></View>
-                <View><Text style={styles.articleTime}>30m</Text></View>
+                <View>
+                    <Image source={{ uri: '../assets/images/profile.png' }} style={styles.profile}/>
+                </View>
+                <View>
+                    <Text style={styles.userName}>imthebest</Text>
+                </View>
+                <View>
+                    <Text style={styles.articleTime}>30m</Text>
+                </View>
             </View>
             <View>
-                <ImageBackground source={{ uri: 'https://popcat.click/twitter-card.jpg'}} style={styles.articleLargeImage}>
-                    <View>
-                        <Image source={{ uri: 'https://content.imageresizer.com/images/memes/Pop-Cat-meme-5.jpg' }} style={styles.articleSmallImage} />
-                    </View>
-                </ImageBackground>
+                <Pressable onPress={() => {
+                    let copy = [...img];
+                    let dum = copy[0];
+                    copy[0] = copy[1];
+                    copy[1] = dum;
+                    setImg(copy);
+                }}>
+                    <ImageBackground source={{ uri: img[0] }} style={styles.articleLargeImage}>
+                        <View>
+                            <Image source={{ uri: img[1] }} style={styles.articleSmallImage} />
+                        </View>
+                    </ImageBackground>
+                </Pressable>
             </View>
         </View>
     );
@@ -25,6 +45,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         backgroundColor: '#fff',
         justifyContent: 'center',
     },
@@ -38,8 +59,8 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 30,
         backgroundColor: 'lightgray',
-        marginLeft: 20,
-        marginRight: 12,
+        marginLeft: 10,
+        marginRight: 10,
     },
     userName: {
         textAlign: 'center',
