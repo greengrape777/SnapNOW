@@ -1,21 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, ImageBackground, Pressable } from 'react-native';
 import { Link } from 'expo-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function App() {
-
-    let frontImg = 'https://popcat.click/twitter-card.jpg';
-    let backImg = 'https://content.imageresizer.com/images/memes/Pop-Cat-meme-5.jpg'
-    let [img, setImg] = useState([frontImg, backImg]);
+const App = () => {
+    const frontImg = 'https://popcat.click/twitter-card.jpg';
+    const backImg = 'https://content.imageresizer.com/images/memes/Pop-Cat-meme-5.jpg'
+    const [images, setImages] = useState([frontImg, backImg]);
 
     const changeImg = () => {
-        let copy = [...img];
-        let dum = copy[0];
-        copy[0] = copy[1];
-        copy[1] = dum;
-        setImg(copy);
-    }
+        setImages(prevImages => [
+            prevImages[1],
+            prevImages[0]
+        ]);
+    };
 
     return (
         <View style={styles.container}>
@@ -32,9 +30,9 @@ export default function App() {
             </View>
             <View>
                 <Pressable onPress={ changeImg }>
-                    <ImageBackground source={{ uri: img[0] }} style={styles.articleLargeImage}>
+                    <ImageBackground source={{ uri: images[0] }} style={styles.articleLargeImage}>
                         <View>
-                            <Image source={{ uri: img[1] }} style={styles.articleSmallImage} />
+                            <Image source={{ uri: images[1] }} style={styles.articleSmallImage} />
                         </View>
                     </ImageBackground>
                 </Pressable>
@@ -86,3 +84,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
 });
+
+export default App;
