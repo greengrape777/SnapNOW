@@ -5,8 +5,11 @@ import { useState, useEffect } from 'react';
 
 const App = () => {
     const frontImg = 'https://popcat.click/twitter-card.jpg';
-    const backImg = 'https://content.imageresizer.com/images/memes/Pop-Cat-meme-5.jpg'
+    const backImg = 'https://content.imageresizer.com/images/memes/Pop-Cat-meme-5.jpg';
+    const likes = 1000;
+
     const [images, setImages] = useState([frontImg, backImg]);
+    
 
     const changeImg = () => {
         setImages(prevImages => [
@@ -19,7 +22,7 @@ const App = () => {
         <View style={styles.container}>
             <View style={styles.user}>
                 <View>
-                    <Image source={{ uri: '../assets/images/profile.png' }} style={styles.profile}/>
+                    <Image source={require('../assets/images/profile.png')} style={styles.profile}/>
                 </View>
                 <View>
                     <Text style={styles.userName}>imthebest</Text>
@@ -37,11 +40,20 @@ const App = () => {
                     </ImageBackground>
                 </Pressable>
             </View>
+            <View style={styles.fedAction}>
+                <Image source={require('../assets/images/like.png')} style={styles.fedLikes} />
+                <Image source={require('../assets/images/comment.png')} style={styles.fedComment} />
+            </View>
+            <Text style={styles.likesText}>
+                {likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} Likes
+            </Text>
+            <Text style={styles.fedContent}>
+                미리보기에서는 텍스트 1줄까지만 지원한다.
+            </Text>
         </View>
     );
 }
 
-/* 393 x 852 */
 
 const styles = StyleSheet.create({
     container: {
@@ -58,8 +70,7 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         borderRadius: 30,
-        backgroundColor: 'lightgray',
-        marginLeft: 10,
+        marginLeft: 15,
         marginRight: 10,
     },
     userName: {
@@ -75,6 +86,7 @@ const styles = StyleSheet.create({
     articleLargeImage: {
         alignSelf: 'stretch',
         height: 400,
+        marginBottom: 10,
     },
     articleSmallImage: {
         borderRadius: 4,
@@ -82,6 +94,30 @@ const styles = StyleSheet.create({
         height: 120,
         marginLeft: 10,
         marginTop: 10,
+    },
+    fedAction: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    fedLikes: {
+        width: 24,
+        height: 24,
+        marginLeft: 15,
+    },
+    fedComment: {
+        width: 24,
+        height: 24,
+        marginLeft: 10,
+    },
+    likesText: {
+        fontWeight: '500',
+        marginLeft: 15,
+        marginBottom: 10,
+    },
+    fedContent: {
+        fontWeight: '500',
+        marginLeft: 15,
     },
 });
 
