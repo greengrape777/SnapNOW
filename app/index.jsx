@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, ImageBackground, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, Pressable, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const App = () => {
     const frontImg = 'https://popcat.click/twitter-card.jpg';
@@ -41,10 +41,14 @@ const App = () => {
                 </Pressable>
             </View>
             <View style={styles.fedAction}>
+                <TouchableOpacity>
                 <Image source={require('../assets/images/like.png')} style={styles.fedLikes} />
-                <Image source={require('../assets/images/comment.png')} style={styles.fedComment} />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image source={require('../assets/images/comment.png')} style={styles.fedComment} />
+                </TouchableOpacity>
             </View>
-            <Text style={styles.likesText}>
+            <Text style={styles.likesQuantity}>
                 {likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} Likes
             </Text>
             <Text style={styles.fedContent}>
@@ -110,7 +114,7 @@ const styles = StyleSheet.create({
         height: 24,
         marginLeft: 10,
     },
-    likesText: {
+    likesQuantity: {
         fontWeight: '500',
         marginLeft: 15,
         marginBottom: 10,
