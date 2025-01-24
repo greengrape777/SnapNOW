@@ -4,7 +4,7 @@ import { Link } from 'expo-router';
 import { useState } from 'react';
 
 const App = () => {
-    const frontImg = 'https://popcat.click/twitter-card.jpg';
+    const frontImg = 'https://e0.pxfuel.com/wallpapers/415/250/desktop-wallpaper-pop-cat-popcat.jpg';
     const backImg = 'https://content.imageresizer.com/images/memes/Pop-Cat-meme-5.jpg';
     const name = 'uos_gungong';
     const time = '30m';
